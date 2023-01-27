@@ -4,14 +4,15 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
+import Layout from "../components/Layout";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   return (
-    <>
+    <Layout>
       <h1>ハロワ</h1>
-    </>
+    </Layout>
   );
 };
 
