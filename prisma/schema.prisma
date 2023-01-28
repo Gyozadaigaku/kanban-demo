@@ -57,6 +57,14 @@ model User {
     sessions      Session[]
 }
 
+model Chatflow {
+    id              String @id @default(cuid())
+    title           String
+    part            String
+    HorizontalAlign String
+    sequence        Int
+}
+
 model VerificationToken {
     identifier String
     token      String   @unique

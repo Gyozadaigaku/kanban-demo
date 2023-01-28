@@ -25,6 +25,29 @@ const createGuidId = () => {
   });
 };
 
+const ChatFlowContent = () => {
+  const { data: chatFlowContents, isLoading } = api.chatFlow.getAll.useQuery();
+  console.log("chatFlow");
+  console.log(chatFlowContents);
+  console.log(isLoading);
+
+  if (isLoading) return <div>Fetching messages...</div>;
+
+  return (
+    <div className="flex flex-col gap-4">
+      {chatFlowContents?.map((msg, index) => {
+        return (
+          <div key={index} className="border p-2">
+            <Link href={`${msg.id}`}>
+              <p>{msg.title}</p>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
@@ -85,6 +108,7 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
+      <div className="pt-10">{<ChatFlowContent />}</div>
       <div className="flex h-screen flex-col p-10">
         <div className="flex flex-initial justify-between">
           <div className="flex items-center">
